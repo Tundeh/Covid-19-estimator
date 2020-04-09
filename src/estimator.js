@@ -1,20 +1,21 @@
+/* eslint-disable linebreak-style */
 // Convert Time Durations to days
 
+// eslint-disable-next-line linebreak-style
 const timeToDays = (data) => {
   if (data.periodType === 'days') {
     return data.timeToElapse;
-  } else if (data.periodType === 'weeks') {
+  } if (data.periodType === 'weeks') {
     return data.timeToElapse * 7;
-  } else if (data.periodType === 'months') {
+  } if (data.periodType === 'months') {
     return data.timeToElapse * 30;
-  } else {
-    return data.timeToElapse;
   }
+  return data.timeToElapse;
 };
 
-//calculate normal impact
+// calculate normal impact
 
-const impact = (data) => {
+const impactCalc = (data) => {
   const duration = timeToDays(data);
   const currentlyInfected = data.reportedCases * 10;
   const timeFactor = Math.floor(duration / 3);
@@ -25,9 +26,9 @@ const impact = (data) => {
   };
 };
 
-//calculate severe impact
+// calculate severe impact
 
-const severeImpact = (data) => {
+const severeImpactCalc = (data) => {
   const duration = timeToDays(data);
   const currentlyInfected = data.reportedCases * 50;
   const timeFactor = Math.floor(duration / 3);
@@ -42,17 +43,16 @@ const covid19ImpactEstimator = (data) => {
   const input = data;
   const impact = {};
   const severeImpact = {};
-  const impactResult = impact(input);
-  const severeImpactResult = severeImpact(input);
+  const impactResult = impactCalc(input);
+  const severeImpactResult = severeImpactCalc(input);
   impact.currentlyInfected = impactResult.currentlyInfected;
   impact.infectionsByRequestedTime = impactResult.InfectionsByTime;
   severeImpact.currentlyInfected = severeImpactResult.currentlyInfected;
   severeImpact.infectionsByRequestedTime = severeImpactResult.InfectionsByTime;
-
   return {
     data: input,
-    impact: impact,
-    severeImpact: severeImpact
+    impact,
+    severeImpact
   };
 };
 
