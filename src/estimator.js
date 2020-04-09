@@ -1,10 +1,11 @@
 // Convert Time Durations to days
-const timeToDays = data => {
-  if (data.periodType == 'days') {
+
+const timeToDays = (data) => {
+  if (data.periodType === 'days') {
     return data.timeToElapse;
-  } else if (data.periodType == 'weeks') {
+  } else if (data.periodType === 'weeks') {
     return data.timeToElapse * 7;
-  } else if (data.periodType == 'months') {
+  } else if (data.periodType === 'months') {
     return data.timeToElapse * 30;
   } else {
     return data.timeToElapse;
@@ -12,11 +13,12 @@ const timeToDays = data => {
 };
 
 //calculate normal impact
-const impact = data => {
+
+const impact = (data) => {
   const duration = timeToDays(data);
   const currentlyInfected = data.reportedCases * 10;
   const timeFactor = Math.floor(duration / 3);
-  const InfectionsByTime = this.currentlyInfected * Math.pow(2, timeFactor);
+  const InfectionsByTime = this.currentlyInfected * 2 ** timeFactor;
   return {
     currentlyInfected,
     InfectionsByTime
@@ -24,18 +26,19 @@ const impact = data => {
 };
 
 //calculate severe impact
-const severeImpact = data => {
+
+const severeImpact = (data) => {
   const duration = timeToDays(data);
   const currentlyInfected = data.reportedCases * 50;
   const timeFactor = Math.floor(duration / 3);
-  const InfectionsByTime = this.currentlyInfected * Math.pow(2, timeFactor);
+  const InfectionsByTime = this.currentlyInfected * (2 ** timeFactor);
   return {
     currentlyInfected,
     InfectionsByTime
   };
 };
 
-const covid19ImpactEstimator = data => {
+const covid19ImpactEstimator = (data) => {
   const input = data;
   const impact = {};
   const severeImpact = {};
