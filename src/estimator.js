@@ -12,6 +12,7 @@ const timeToDays = (data) => {
   return data.timeToElapse;
 };
 
+// eslint-disable-next-line no-unused-vars
 const inputData = {
   region: {
     name: 'Africa',
@@ -52,7 +53,7 @@ const severeImpactCalc = (data) => {
   };
 };
 
-const covid19ImpactEstimator = (data = inputData) => {
+const covid19ImpactEstimator = (data) => {
   const input = JSON.parse(JSON.stringify(data));
   const impactObj = {};
   const severeImpactObj = {};
@@ -67,7 +68,7 @@ const covid19ImpactEstimator = (data = inputData) => {
     impact: impactObj,
     severeImpact: severeImpactObj
   };
-  return output;
+  return (JSON.stringify(output));
 };
 
 
