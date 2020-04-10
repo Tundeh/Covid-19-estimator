@@ -20,9 +20,9 @@ const inputData = {
     avgDailyIncomeInUSD: 5,
     avgDailyIncomePopulation: 0.71
   },
-  periodType: 'days',
-  timeToElapse: 58,
-  reportedCases: 674,
+  periodType: 'weeks',
+  timeToElapse: 38,
+  reportedCases: 2747,
   population: 66622705,
   totalHospitalBeds: 1380614
 };
@@ -53,7 +53,7 @@ const severeImpactCalc = (data) => {
   };
 };
 
-const covid19ImpactEstimator = (data) => {
+const covid19ImpactEstimator = (data = inputData) => {
   const input = JSON.parse(JSON.stringify(data));
   const impactObj = {};
   const severeImpactObj = {};
@@ -70,7 +70,7 @@ const covid19ImpactEstimator = (data) => {
       severeImpact: severeImpactObj
     }
   };
-  return output;
+  return (JSON.stringify(output));
 };
 
 
