@@ -54,7 +54,8 @@ const severeImpactCalc = (data) => {
 };
 
 const covid19ImpactEstimator = (data) => {
-  const input = JSON.parse(JSON.stringify(data));
+  // const input = JSON.parse(JSON.stringify(data));
+  const input = data;
   const impactObj = {};
   const severeImpactObj = {};
   const impactResult = impactCalc(input);
