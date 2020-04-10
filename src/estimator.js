@@ -1,6 +1,5 @@
 /* eslint-disable linebreak-style */
 // Convert Time Durations to days
-
 // eslint-disable-next-line linebreak-style
 const timeToDays = (data) => {
   if (data.periodType === 'days') {
@@ -41,19 +40,20 @@ const severeImpactCalc = (data) => {
 
 const covid19ImpactEstimator = (data) => {
   const input = data;
-  const impact = {};
-  const severeImpact = {};
+  const impactObj = {};
+  const severeImpactObj = {};
   const impactResult = impactCalc(input);
   const severeImpactResult = severeImpactCalc(input);
-  impact.currentlyInfected = impactResult.currentlyInfected;
-  impact.infectionsByRequestedTime = impactResult.InfectionsByTime;
-  severeImpact.currentlyInfected = severeImpactResult.currentlyInfected;
-  severeImpact.infectionsByRequestedTime = severeImpactResult.InfectionsByTime;
+  impactObj.currentlyInfected = impactResult.currentlyInfected;
+  impactObj.infectionsByRequestedTime = impactResult.InfectionsByTime;
+  severeImpactObj.currentlyInfected = severeImpactResult.currentlyInfected;
+  severeImpactObj.infectionsByRequestedTime = severeImpactResult.InfectionsByTime;
   return {
     data: input,
-    impact,
-    severeImpact
+    impact: impactObj,
+    severeImpact: severeImpactObj
   };
 };
+
 
 export default covid19ImpactEstimator;
