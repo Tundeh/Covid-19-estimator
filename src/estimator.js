@@ -48,11 +48,12 @@ const covid19ImpactEstimator = (data) => {
   impactObj.infectionsByRequestedTime = impactResult.InfectionsByTime;
   severeImpactObj.currentlyInfected = severeImpactResult.currentlyInfected;
   severeImpactObj.infectionsByRequestedTime = severeImpactResult.InfectionsByTime;
-  return {
+  const output = {
     data: input,
     impact: impactObj,
     severeImpact: severeImpactObj
   };
+  return JSON.stringify(output);
 };
 
 
