@@ -33,10 +33,10 @@ const impactCalc = (data) => {
   const duration = timeToDays(data);
   const currentlyInfected = data.reportedCases * 10;
   const timeFactor = Math.floor(duration / 3);
-  const InfectionsByTime = this.currentlyInfected * 2 ** timeFactor;
+  const infectionsByRequestedTime = currentlyInfected * (2 ** timeFactor);
   return {
     currentlyInfected,
-    InfectionsByTime
+    infectionsByRequestedTime
   };
 };
 
@@ -44,32 +44,43 @@ const impactCalc = (data) => {
 
 const severeImpactCalc = (data) => {
   const duration = timeToDays(data);
-  const currentlyInfected = data.reportedCases * 50;
+  const xcurrentlyInfected = data.reportedCases * 50;
   const timeFactor = Math.floor(duration / 3);
-  const InfectionsByTime = this.currentlyInfected * (2 ** timeFactor);
+  const xInfectionsByRequestedTime = xcurrentlyInfected * (2 ** timeFactor);
   return {
-    currentlyInfected,
-    InfectionsByTime
+    xcurrentlyInfected,
+    xInfectionsByRequestedTime
   };
 };
 
 const covid19ImpactEstimator = (data) => {
   const input = data;
-  const impactObj = {};
-  const severeImpactObj = {};
   const impactResult = impactCalc(input);
   const severeImpactResult = severeImpactCalc(input);
-  impactObj.currentlyInfected = impactResult.currentlyInfected;
-  impactObj.infectionsByRequestedTime = impactResult.InfectionsByTime;
-  severeImpactObj.currentlyInfected = severeImpactResult.currentlyInfected;
-  severeImpactObj.infectionsByRequestedTime = severeImpactResult.InfectionsByTime;
-  const output = {
+  const { currentlyInfected, infectionsByRequestedTime } = impactResult;
+  const { xcurrentlyInfected, xInfectionsByRequestedTime } = severeImpactResult;
+
+
+  const impact = {
+    currentlyInfected,
+    infectionsByRequestedTime
+  };
+  const severeImpact = {
+    currentlyInfected: xcurrentlyInfected,
+    infectionsByRequestedTime: xInfectionsByRequestedTime
+  };
+  return {
+    input,
+    impact,
+    severeImpact
+  };
+  /* const output = {
     input,
     impact: impactObj,
     severeImpact: severeImpactObj
 
   };
-  return output;
+  return output; */
 };
 
 
