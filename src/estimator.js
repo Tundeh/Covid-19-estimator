@@ -12,6 +12,20 @@ const timeToDays = (data) => {
   return data.timeToElapse;
 };
 
+const inputData = {
+  region: {
+    name: 'Africa',
+    avgAge: 19.7,
+    avgDailyIncomeInUSD: 5,
+    avgDailyIncomePopulation: 0.71
+  },
+  periodType: 'days',
+  timeToElapse: 58,
+  reportedCases: 674,
+  population: 66622705,
+  totalHospitalBeds: 1380614
+};
+
 // calculate normal impact
 
 const impactCalc = (data) => {
@@ -38,8 +52,8 @@ const severeImpactCalc = (data) => {
   };
 };
 
-const covid19ImpactEstimator = (data) => {
-  const input = JSON.parse(JSON.stringify(data));
+const covid19ImpactEstimator = (data = inputData) => {
+  const input = data;
   const impactObj = {};
   const severeImpactObj = {};
   const impactResult = impactCalc(input);
@@ -48,12 +62,12 @@ const covid19ImpactEstimator = (data) => {
   impactObj.infectionsByRequestedTime = impactResult.InfectionsByTime;
   severeImpactObj.currentlyInfected = severeImpactResult.currentlyInfected;
   severeImpactObj.infectionsByRequestedTime = severeImpactResult.InfectionsByTime;
-  const output = {
+
+  return {
     data: input,
     impact: impactObj,
     severeImpact: severeImpactObj
   };
-  return JSON.stringify(output);
 };
 
 
