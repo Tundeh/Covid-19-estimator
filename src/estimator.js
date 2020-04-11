@@ -23,8 +23,8 @@ const impactCalc = (data) => {
   const severeCasesByRequestedTime = Math.trunc(0.15 * infectionsByRequestedTime);
   const availableBeds = (0.35 * data.totalHospitalBeds);
   const hospitalBedsByRequestedTime = Math.trunc(availableBeds - severeCasesByRequestedTime);
-  const casesForICUByRequestedTime = Math.trunc(0.05 * infectionsByRequestedTime);
-  const casesForVentilatorsByRequestedTime = Math.trunc(0.02 * infectionsByRequestedTime);
+  const casesForICUByRequestedTime = (0.05 * infectionsByRequestedTime);
+  const casesForVentilatorsByRequestedTime = (0.02 * infectionsByRequestedTime);
   const avDI = data.region.avgDailyIncomeInUSD;
   const avDIPop = data.region.avgDailyIncomePopulation;
   // eslint-disable-next-line max-len
@@ -51,8 +51,8 @@ const severeImpactCalc = (data) => {
   const xsevereCasesByTime = Math.trunc(0.15 * xinfectionsByRequestedTime);
   const xavailableBeds = (0.35 * data.totalHospitalBeds);
   const xhospitalBedsByTime = Math.trunc(xavailableBeds - xsevereCasesByTime);
-  const xcasesForICUByTime = Math.trunc(0.05 * xinfectionsByRequestedTime);
-  const xcasesForVentilatorsByTime = Math.trunc(0.02 * xinfectionsByRequestedTime);
+  const xcasesForICUByTime = (0.05 * xinfectionsByRequestedTime);
+  const xcasesForVentilatorsByTime = (0.02 * xinfectionsByRequestedTime);
   const avDI = data.region.avgDailyIncomeInUSD;
   const avDIPop = data.region.avgDailyIncomePopulation;
   // eslint-disable-next-line max-len
