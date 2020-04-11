@@ -39,8 +39,8 @@ const impactCalc = (data) => {
   const hospitalBedsByRequestedTime = Math.trunc(availableBeds - severeCasesByRequestedTime);
   const casesForICUByRequestedTime = Math.trunc(0.05 * infectionsByRequestedTime);
   const casesForVentilatorsByRequestedTime = Math.trunc(0.02 * infectionsByRequestedTime);
-  const avDI = data.avgDailyIncomeInUSD;
-  const avDIPop = data.avgDailyIncomePopulation;
+  const avDI = data.region.avgDailyIncomeInUSD;
+  const avDIPop = data.region.avgDailyIncomePopulation;
   const dollarsInFlight = (infectionsByRequestedTime * avDI * duration * avDIPop).toFixed(2);
   return {
     currentlyInfected,
@@ -65,8 +65,8 @@ const severeImpactCalc = (data) => {
   const xhospitalBedsByTime = Math.trunc(xavailableBeds - xsevereCasesByTime);
   const xcasesForICUByTime = Math.trunc(0.05 * xinfectionsByRequestedTime);
   const xcasesForVentilatorsByTime = Math.trunc(0.02 * xinfectionsByRequestedTime);
-  const avDI = data.avgDailyIncomeInUSD;
-  const avDIPop = data.avgDailyIncomePopulation;
+  const avDI = data.region.avgDailyIncomeInUSD;
+  const avDIPop = data.region.avgDailyIncomePopulation;
   const xdollarsInFlight = (xinfectionsByRequestedTime * avDI * duration * avDIPop).toFixed(2);
   return {
     xcurrentlyInfected,
