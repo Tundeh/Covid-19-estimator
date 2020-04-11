@@ -42,7 +42,7 @@ const impactCalc = (data) => {
   const avDIPop = data.region.avgDailyIncomePopulation;
   // eslint-disable-next-line max-len
   // const dollarsInFlight = Number((infectionsByRequestedTime * avDI * duration * avDIPop).toFixed(2));
-  const dollarsInFlight = Math.trunc(infectionsByRequestedTime * avDI * duration * avDIPop);
+  const dollarsInFlight = Math.trunc((infectionsByRequestedTime * avDI * avDIPop) / duration);
   return {
     currentlyInfected,
     infectionsByRequestedTime,
@@ -70,7 +70,7 @@ const severeImpactCalc = (data) => {
   const avDIPop = data.region.avgDailyIncomePopulation;
   // eslint-disable-next-line max-len
   // const xdollarsInFlight = Number((xinfectionsByRequestedTime * avDI * duration * avDIPop).toFixed(2));
-  const xdollarsInFlight = Math.trunc(xinfectionsByRequestedTime * avDI * duration * avDIPop);
+  const xdollarsInFlight = Math.trunc((xinfectionsByRequestedTime * avDI * avDIPop) / duration);
   return {
     xcurrentlyInfected,
     xinfectionsByRequestedTime,
