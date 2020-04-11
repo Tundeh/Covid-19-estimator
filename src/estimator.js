@@ -23,7 +23,7 @@ const impactCalc = (data) => {
   const severeCasesByRequestedTime = Math.trunc(0.15 * infectionsByRequestedTime);
   const availableBeds = (0.35 * data.totalHospitalBeds);
   const hospitalBedsByRequestedTime = Math.trunc(availableBeds - severeCasesByRequestedTime);
-  const casesForICUByRequestedTime = (0.05 * infectionsByRequestedTime);
+  const casesForICUByRequestedTime = 0.05 * infectionsByRequestedTime;
   const casesForVentilatorsByRequestedTime = (0.02 * infectionsByRequestedTime);
   const avDI = data.region.avgDailyIncomeInUSD;
   const avDIPop = data.region.avgDailyIncomePopulation;
