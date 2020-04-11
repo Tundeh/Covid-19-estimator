@@ -32,10 +32,10 @@ const inputData = {
 const impactCalc = (data) => {
   const duration = timeToDays(data);
   const currentlyInfected = data.reportedCases * 10;
-  const timeFactor = Math.trunc(duration / 3);
+  const timeFactor = Math.floor(duration / 3);
   const infectionsByRequestedTime = currentlyInfected * (2 ** timeFactor);
   const severeCasesByRequestedTime = Math.trunc(0.15 * infectionsByRequestedTime);
-  const availableBeds = Math.trunc(0.35 * data.totalHospitalBeds);
+  const availableBeds = (0.35 * data.totalHospitalBeds);
   const hospitalBedsByRequestedTime = Math.trunc(availableBeds - severeCasesByRequestedTime);
   return {
     currentlyInfected,
@@ -53,7 +53,7 @@ const severeImpactCalc = (data) => {
   const timeFactor = Math.trunc(duration / 3);
   const xinfectionsByRequestedTime = xcurrentlyInfected * (2 ** timeFactor);
   const xsevereCasesByTime = Math.trunc(0.15 * xinfectionsByRequestedTime);
-  const xavailableBeds = Math.trunc(0.35 * data.totalHospitalBeds);
+  const xavailableBeds = (0.35 * data.totalHospitalBeds);
   const xhospitalBedsByTime = Math.trunc(xavailableBeds - xsevereCasesByTime);
   return {
     xcurrentlyInfected,
