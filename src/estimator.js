@@ -12,20 +12,6 @@ const timeToDays = (data) => {
   return data.timeToElapse;
 };
 
-// eslint-disable-next-line no-unused-vars
-const inputData = {
-  region: {
-    name: 'Africa',
-    avgAge: 19.7,
-    avgDailyIncomeInUSD: 5,
-    avgDailyIncomePopulation: 0.71
-  },
-  periodType: 'weeks',
-  timeToElapse: 38,
-  reportedCases: 2747,
-  population: 66622705,
-  totalHospitalBeds: 1380614
-};
 
 // calculate normal impact
 
@@ -41,7 +27,8 @@ const impactCalc = (data) => {
   const casesForVentilatorsByRequestedTime = Math.trunc(0.02 * infectionsByRequestedTime);
   const avDI = data.region.avgDailyIncomeInUSD;
   const avDIPop = data.region.avgDailyIncomePopulation;
-  const dollarsInFlight = (infectionsByRequestedTime * avDI * duration * avDIPop).toFixed(2);
+  // eslint-disable-next-line max-len
+  const dollarsInFlight = Number((infectionsByRequestedTime * avDI * duration * avDIPop).toFixed(2));
   return {
     currentlyInfected,
     infectionsByRequestedTime,
@@ -67,7 +54,8 @@ const severeImpactCalc = (data) => {
   const xcasesForVentilatorsByTime = Math.trunc(0.02 * xinfectionsByRequestedTime);
   const avDI = data.region.avgDailyIncomeInUSD;
   const avDIPop = data.region.avgDailyIncomePopulation;
-  const xdollarsInFlight = (xinfectionsByRequestedTime * avDI * duration * avDIPop).toFixed(2);
+  // eslint-disable-next-line max-len
+  const xdollarsInFlight = Number((xinfectionsByRequestedTime * avDI * duration * avDIPop).toFixed(2));
   return {
     xcurrentlyInfected,
     xinfectionsByRequestedTime,
