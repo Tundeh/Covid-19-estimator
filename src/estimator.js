@@ -32,11 +32,11 @@ const inputData = {
 const impactCalc = (data) => {
   const duration = timeToDays(data);
   const currentlyInfected = data.reportedCases * 10;
-  const timeFactor = Math.floor(duration / 3);
+  const timeFactor = Math.trunc(duration / 3);
   const infectionsByRequestedTime = currentlyInfected * (2 ** timeFactor);
-  const severeInfectionsByRequestedTime = Math.floor(0.15 * infectionsByRequestedTime);
-  const availableBeds = Math.floor(0.35 * data.totalHospitalBeds);
-  const hospitalBedsByRequestedTime = Math.floor(availableBeds - severeInfectionsByRequestedTime);
+  const severeInfectionsByRequestedTime = Math.trunc(0.15 * infectionsByRequestedTime);
+  const availableBeds = Math.trunc(0.35 * data.totalHospitalBeds);
+  const hospitalBedsByRequestedTime = Math.trunc(availableBeds - severeInfectionsByRequestedTime);
   return {
     currentlyInfected,
     infectionsByRequestedTime,
@@ -50,15 +50,15 @@ const impactCalc = (data) => {
 const severeImpactCalc = (data) => {
   const duration = timeToDays(data);
   const xcurrentlyInfected = data.reportedCases * 50;
-  const timeFactor = Math.floor(duration / 3);
+  const timeFactor = Math.trunc(duration / 3);
   const xinfectionsByRequestedTime = xcurrentlyInfected * (2 ** timeFactor);
-  const xsevereInfectionsByTime = Math.floor(0.15 * xinfectionsByRequestedTime);
-  const xavailableBeds = Math.floor(0.35 * data.totalHospitalBeds);
-  const xhospitalBedsByTime = Math.floor(xavailableBeds - xsevereInfectionsByTime);
+  const xsevereCasesByTime = Math.trunc(0.15 * xinfectionsByRequestedTime);
+  const xavailableBeds = Math.trunc(0.35 * data.totalHospitalBeds);
+  const xhospitalBedsByTime = Math.trunc(xavailableBeds - xsevereCasesByTime);
   return {
     xcurrentlyInfected,
     xinfectionsByRequestedTime,
-    xsevereInfectionsByTime,
+    xsevereCasesByTime,
     xhospitalBedsByTime
   };
 };
@@ -68,21 +68,21 @@ const covid19ImpactEstimator = (data) => {
   const impactResult = impactCalc(input);
   const severeImpactResult = severeImpactCalc(input);
   const { currentlyInfected, infectionsByRequestedTime } = impactResult;
-  const { severeInfectionsByRequestedTime, hospitalBedsByRequestedTime } = impactResult;
+  const { severeCasesByRequestedTime, hospitalBedsByRequestedTime } = impactResult;
   const { xcurrentlyInfected, xinfectionsByRequestedTime } = severeImpactResult;
-  const { xsevereInfectionsByTime, xhospitalBedsByTime } = severeImpactResult;
+  const { xsevereCasesByTime, xhospitalBedsByTime } = severeImpactResult;
 
 
   const impact = {
     currentlyInfected,
     infectionsByRequestedTime,
-    severeInfectionsByRequestedTime,
+    severeCasesByRequestedTime,
     hospitalBedsByRequestedTime
   };
   const severeImpact = {
     currentlyInfected: xcurrentlyInfected,
     infectionsByRequestedTime: xinfectionsByRequestedTime,
-    severeInfectionsByRequestedTime: xsevereInfectionsByTime,
+    severeCasesByRequestedTime: xsevereCasesByTime,
     hospitalBedsByRequestedTime: xhospitalBedsByTime
   };
   return {
