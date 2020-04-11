@@ -11,7 +11,20 @@ const timeToDays = (data) => {
   }
   return data.timeToElapse;
 };
-
+// eslint-disable-next-line no-unused-vars
+const inputData = {
+  region: {
+    name: 'Africa',
+    avgAge: 19.7,
+    avgDailyIncomeInUSD: 4,
+    avgDailyIncomePopulation: 0.73
+  },
+  periodType: 'days',
+  timeToElapse: 38,
+  reportedCases: 2747,
+  population: 92931687,
+  totalHospitalBeds: 678874
+};
 
 // calculate normal impact
 
@@ -23,13 +36,13 @@ const impactCalc = (data) => {
   const severeCasesByRequestedTime = Math.trunc(0.15 * infectionsByRequestedTime);
   const availableBeds = (0.35 * data.totalHospitalBeds);
   const hospitalBedsByRequestedTime = Math.trunc(availableBeds - severeCasesByRequestedTime);
-  const casesForICUByRequestedTime = Math.floor((0.05 * infectionsByRequestedTime));
-  const casesForVentilatorsByRequestedTime = Math.floor((0.02 * infectionsByRequestedTime));
+  const casesForICUByRequestedTime = Math.trunc((0.05 * infectionsByRequestedTime));
+  const casesForVentilatorsByRequestedTime = Math.trunc((0.02 * infectionsByRequestedTime));
   const avDI = data.region.avgDailyIncomeInUSD;
   const avDIPop = data.region.avgDailyIncomePopulation;
   // eslint-disable-next-line max-len
   // const dollarsInFlight = Number((infectionsByRequestedTime * avDI * duration * avDIPop).toFixed(2));
-  const dollarsInFlight = Math.floor(infectionsByRequestedTime * avDI * duration * avDIPop);
+  const dollarsInFlight = Math.trunc(infectionsByRequestedTime * avDI * duration * avDIPop);
   return {
     currentlyInfected,
     infectionsByRequestedTime,
@@ -51,13 +64,13 @@ const severeImpactCalc = (data) => {
   const xsevereCasesByTime = Math.trunc(0.15 * xinfectionsByRequestedTime);
   const xavailableBeds = (0.35 * data.totalHospitalBeds);
   const xhospitalBedsByTime = Math.trunc(xavailableBeds - xsevereCasesByTime);
-  const xcasesForICUByTime = Math.floor((0.05 * xinfectionsByRequestedTime));
-  const xcasesForVentilatorsByTime = Math.floor((0.02 * xinfectionsByRequestedTime));
+  const xcasesForICUByTime = Math.trunc((0.05 * xinfectionsByRequestedTime));
+  const xcasesForVentilatorsByTime = Math.trunc((0.02 * xinfectionsByRequestedTime));
   const avDI = data.region.avgDailyIncomeInUSD;
   const avDIPop = data.region.avgDailyIncomePopulation;
   // eslint-disable-next-line max-len
   // const xdollarsInFlight = Number((xinfectionsByRequestedTime * avDI * duration * avDIPop).toFixed(2));
-  const xdollarsInFlight = Math.floor(xinfectionsByRequestedTime * avDI * duration * avDIPop);
+  const xdollarsInFlight = Math.trunc(xinfectionsByRequestedTime * avDI * duration * avDIPop);
   return {
     xcurrentlyInfected,
     xinfectionsByRequestedTime,
